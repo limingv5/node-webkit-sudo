@@ -1,0 +1,28 @@
+{
+  "name": "node-webkit-sudo",
+  "version": "0.1.0",
+  "description": "sudo for Mac OSX",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/limingv5/node-webkit-sudo.git"
+  },
+  "keywords": [
+    "sudo",
+    "node-webkit",
+    "nwjs"
+  ],
+  "dependencies": {
+    "inpath": "~1.0.2",
+    "pidof": "~1.0.2"
+  },
+  "author": "limingv5",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/limingv5/node-webkit-sudo/issues"
+  },
+  "homepage": "https://github.com/limingv5/node-webkit-sudo#readme"
+}
