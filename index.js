@@ -2,7 +2,7 @@ var spawn = require("child_process").spawn;
 var pidof = require("pidof");
 var inpathSync = require("inpath").sync;
 
-var sudoBin = inpathSync("sudo", process.env["PATH"].split(':'));
+var sudoBin = inpathSync("sudo");
 var isWin = (process.platform == "win32");
 var MSG = [
   "PID is NULL",
