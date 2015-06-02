@@ -1,8 +1,13 @@
 var spawn = require("child_process").spawn;
 var pidof = require("pidof");
 var inpathSync = require("inpath").sync;
+
 var sudoBin = inpathSync("sudo", process.env["PATH"].split(':'));
-var isWin = process.platform == "win32";
+var isWin = (process.platform == "win32");
+var MSG = [
+  "PID is NULL",
+  "password is INVALID"
+];
 
 function _exec(command, cb) {
   cb = cb || function () {};
@@ -38,7 +43,7 @@ function _exec(command, cb) {
     lines.forEach(function (line) {
       if (line === prompt) {
         if (++prompts > 1) {
-          cb(true, {msg: "password invalid!"});
+          cb(true, {code: 1, msg: MSG[1]});
           child.stdin.write("\n\n\n\n");
         }
         else {
@@ -49,9 +54,7 @@ function _exec(command, cb) {
   });
 }
 
-function Sudo() {
-
-}
+function Sudo() {}
 
 Sudo.prototype = {
   constructor: Sudo,
@@ -74,18 +77,23 @@ Sudo.prototype = {
         _exec(command, cb);
       }
       else {
-        cb(true);
+        cb(true, {code: 1, msg: MSG[1]});
       }
     }.bind(this));
   },
   killByPid: function (pid, cb) {
-    pid = pid.toString();
+    if (pid) {
+      pid = pid.toString();
 
-    if (isWin) {
-      this.exec(["tskill", pid], cb);
+      if (isWin) {
+        this.exec(["tskill", pid], cb);
+      }
+      else {
+        this.exec(["kill", "-9", pid], cb);
+      }
     }
     else {
-      this.exec(["kill", "-9", pid], cb);
+      cb(true, {code: 0, msg: MSG[0]});
     }
   },
   killByName: function (name, cb) {
