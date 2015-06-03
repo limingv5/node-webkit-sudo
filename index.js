@@ -99,9 +99,14 @@ Sudo.prototype = {
   killByName: function (name, cb) {
     var self = this;
     pidof(name, function(err, pids) {
-      pids.forEach(function (pid) {
-        self.killByPid(pid, cb);
-      })
+      if (pids && pids.length) {
+        pids.forEach(function (pid) {
+          self.killByPid(pid, cb);
+        });
+      }
+      else {
+        cb(true, {code: 0, msg: MSG[0]});
+      }
     });
   }
 };

@@ -1,6 +1,6 @@
 {
   "name": "node-webkit-sudo",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "sudo for NW.js in Mac OSX",
   "main": "index.js",
   "scripts": {
