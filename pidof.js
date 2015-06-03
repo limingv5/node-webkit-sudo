@@ -15,7 +15,7 @@ function pidof(cmd, callback) {
 
 pidof.parse = function (data, cmd) {
   var cmdRe = new RegExp('/' + cmd + '$');
-  var lines = data.trim().split('\n');
+  var lines = data.trim().split("\n");
 
   var pidlist = [];
   for (var i = 0, l = lines.length; i < l; i++) {
