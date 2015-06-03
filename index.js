@@ -1,6 +1,6 @@
 var spawn = require("child_process").spawn;
-var pidof = require("pidof");
 var inpathSync = require("inpath").sync;
+var pidof = require("./pidof");
 
 var sudoBin = inpathSync("sudo");
 var isWin = (process.platform == "win32");
@@ -26,7 +26,7 @@ function _exec(command, cb) {
       throw new Error("Couldn't start " + bin);
     }
 
-    if (pid || child.exitCode !== null) {
+    if (pid.length || child.exitCode !== null) {
       cb(null, {pid: pid});
     }
     else {
@@ -79,7 +79,7 @@ Sudo.prototype = {
       else {
         cb(true, {code: 1, msg: MSG[1]});
       }
-    }.bind(this));
+    });
   },
   killByPid: function (pid, cb) {
     if (pid) {
@@ -97,9 +97,12 @@ Sudo.prototype = {
     }
   },
   killByName: function (name, cb) {
-    pidof(name, function(err, pid) {
-      this.killByPid(pid, cb);
-    }.bind(this));
+    var self = this;
+    pidof(name, function(err, pids) {
+      pids.forEach(function (pid) {
+        self.killByPid(pid, cb);
+      })
+    });
   }
 };
 

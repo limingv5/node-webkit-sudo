@@ -1,6 +1,6 @@
 {
   "name": "node-webkit-sudo",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "sudo for NW.js in Mac OSX",
   "main": "index.js",
   "scripts": {
@@ -16,8 +16,7 @@
     "nwjs"
   ],
   "dependencies": {
-    "inpath": "~1.0.2",
-    "pidof": "~1.0.2"
+    "inpath": "~1.0.2"
   },
   "author": "limingv5",
   "license": "ISC",
