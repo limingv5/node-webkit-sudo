@@ -21,7 +21,7 @@ sudo.check(function (valid) {
 > exec the commands
 
 ```
-sudo.exec(function ([commands, ...], function (err, data) {
+sudo.exec([commands, ...], function (err, data) {
 
 });
 ```
